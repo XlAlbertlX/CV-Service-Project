@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Food Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Food Classification Service</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <button type="submit">Classify Food</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if success %}
+            <div class="result">
+                <h3>Prediction Result:</h3>
+                <p><strong>Class ID:</strong> {{ prediction }}</p>
+                <p><strong>Food Type:</strong> {{ class_name }}</p>
+                <p><strong>Confidence:</strong> {{ (confidence * 100)|round(2) }}%</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
